@@ -92,3 +92,34 @@ console.log(`Rectangle's area is ${area(myRectangle)}`)
 
 const myCircle: Circle = { kind: "circle", radius: 10 };
 console.log(`Cercle's area is ${area(myCircle)}`);
+
+/**************типы any  &  unknown ******************************* */
+type typePerson = {
+    address: string;
+}
+let person1: any;
+person1 = JSON.parse('{"adress": "25 Broadway"}');
+console.log(person1.address);
+
+let person2: unknown;
+person2 = JSON.parse('{"adress": "25 Broadway"}');
+console.log(person2.address) //error
+
+/*первый вариант защиты */
+// const isPerson = (object: any): object is typePerson => "address" in object;
+
+/* второй вариант защиты, более безопасный  */
+const isPerson = (object: any): object is typePerson => !!object && "address" in object;
+
+if(isPerson(person2)) console.log(person2.address)
+else console.log("person2 is not a Person")
+
+/*Более простым решением будет объявить собственное свойво-дискриминатор, которое будет индеитифицировать этот тип как person */
+type disPerson = {
+  discriminator: 'person';
+  address: string
+}
+
+const isPerson1 = (object: any): object is disPerson => !!object && object.discriminator === 'person';
+if(isPerson1(person2)) console.log(person2.address, 'discriminator')
+else console.log("person2 is not a Person", 'discriminator')
