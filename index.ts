@@ -125,7 +125,13 @@ if(isPerson1(person2)) console.log(person2.address, 'discriminator')
 else console.log("person2 is not a Person", 'discriminator')
 
 /***********************     mini-project      *********************/
-
+/*
+Напишите программу с двумя пользовательскими типами, Dog und Fush, объявленными с помощью классовю Каждый из этих типов должен иметь свойсво name. Класс Dog должен иметь метод sayHello(): string, а класс Fish - 
+метод dive(howDeep: number): string.
+Объявите ноый тип Pet в качастве объединения Dog und Fish. Напишите функцию talkToPet(pet: Pet): string, которая будте использовать защиты типов и либо вызывать метод sayHello() для экзепляра Dog, либо выводить сообщение
+'Fish cannot talk, sorry.'
+Вызовите talkToPet() трижды, в первый раз передав объект Dog, затем Fish и в заключении объект, не являющийся ни Fish ни Dog.
+*/
 class Dog {
 readonly  name: string = 'dog';
    sayHello(): string {
