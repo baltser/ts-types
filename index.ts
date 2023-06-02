@@ -153,30 +153,29 @@ function talkToPet(pet: Pet): string {
 console.log(talkToPet(dog))
 console.log(talkToPet(fish))
 console.log(talkToPet({}))
-/********************мусор*************/
-// const isPet = (object: Pet) => { 
-//   if(!!object && object.name === 'dog') return dog;
-//   else if(!!object && object.name === 'fish') return fish;
-//   else return object
-// };
+/**************** Правильное решение *********/
 
-// const isFish = (object: any): object is Pet => !!object && object.name === 'fish';
+class Dog1 {
+  constructor( readonly name: string ){};
+  sayHello(): string {
+    return 'Dog say hello!';
+  }
+}
+class Fish1 {
+  constructor( readonly name: string ) {};
+  dive(howDeep: number): string {
+    return `Diving ${howDeep} feet`;
+  }
+}
+type Pet1 = Dog1 | Fish1;
 
-// function talkToPet(pet: Pet): string {
-//   console.log(isPet())
-  // if(isPet(pet) === 'dog') return dog.sayHello()
-  // else if (isPet(pet) === 'fish') return fish.dive(2)
-  // else return 'falled'
-// }
-// console.log(talkToPet(dog))
-// console.log(talkToPet(fish))
-// console.log(talkToPet())
-// // let pet: Pet 
-// // console.log(fish.dive())
-// const isPet =  (object: any): void => console.log(object)
-// isPet(Pet)
-// function talkToPet(pet: Pet): void{
-//   if(isPet(pet)) console.log(pet, 'discriminator')
-//   else console.log("Fish", 'discriminator')
-// }
-// talkToPet()
+function talkTopet(pet: Pet1): string | undefined {
+  if (pet instanceof Dog1) return pet.sayHello();
+  else if (pet instanceof Fish1) return 'Fish cannot talk, sorry.';
+}
+const myDog = new Dog1('Sammy');
+const myFish = new Fish1('Marry');
+
+console.log(talkTopet(myDog))
+console.log(talkTopet(myFish))
+talkToPet({name: 'John'})
