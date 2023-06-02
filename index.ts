@@ -123,3 +123,60 @@ type disPerson = {
 const isPerson1 = (object: any): object is disPerson => !!object && object.discriminator === 'person';
 if(isPerson1(person2)) console.log(person2.address, 'discriminator')
 else console.log("person2 is not a Person", 'discriminator')
+
+/***********************     mini-project      *********************/
+
+class Dog {
+readonly  name: string = 'dog';
+   sayHello(): string {
+    return 'hello!'
+  }
+}
+const dog: Dog = new Dog();
+
+class Fish {
+readonly name: string = 'fish';
+ dive(howDeep: number): string {
+  return "Fish cannot talk, sorry ";
+  }
+}
+const fish: Fish = new Fish();
+
+type Pet = Dog | Fish ;
+
+function talkToPet(pet: Pet): string {
+  if(pet.name === 'dog') return dog.sayHello()
+  if(pet.name === 'fish') return fish.dive(3)
+  else return 'falled'
+}
+
+console.log(talkToPet(dog))
+console.log(talkToPet(fish))
+console.log(talkToPet({}))
+/********************мусор*************/
+// const isPet = (object: Pet) => { 
+//   if(!!object && object.name === 'dog') return dog;
+//   else if(!!object && object.name === 'fish') return fish;
+//   else return object
+// };
+
+// const isFish = (object: any): object is Pet => !!object && object.name === 'fish';
+
+// function talkToPet(pet: Pet): string {
+//   console.log(isPet())
+  // if(isPet(pet) === 'dog') return dog.sayHello()
+  // else if (isPet(pet) === 'fish') return fish.dive(2)
+  // else return 'falled'
+// }
+// console.log(talkToPet(dog))
+// console.log(talkToPet(fish))
+// console.log(talkToPet())
+// // let pet: Pet 
+// // console.log(fish.dive())
+// const isPet =  (object: any): void => console.log(object)
+// isPet(Pet)
+// function talkToPet(pet: Pet): void{
+//   if(isPet(pet)) console.log(pet, 'discriminator')
+//   else console.log("Fish", 'discriminator')
+// }
+// talkToPet()
